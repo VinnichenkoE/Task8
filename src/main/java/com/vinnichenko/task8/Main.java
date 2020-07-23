@@ -1,26 +1,14 @@
 package com.vinnichenko.task8;
 
-import java.sql.*;
+import com.vinnichenko.task8.exception.DaoException;
+import com.vinnichenko.task8.model.dao.impl.BookListDaoImpl;
+import com.vinnichenko.task8.model.entity.CustomBook;
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
-        try (Connection connection = ConnectorDB.getConnection()) {
-            Statement st = connection.createStatement();
-            ResultSet resultSet = st.executeQuery("select * from warehouse");
-            while (resultSet.next()) {
-                String id = resultSet.getString("id");
-                String title = resultSet.getString("title");
-                int numberPages = resultSet.getInt("numberPages");
-                String author = resultSet.getString("authors");
-                String typography = resultSet.getString("typography");
-                System.out.println(id);
-                System.out.println(title);
-                System.out.println(numberPages);
-                System.out.println(author);
-                System.out.println(typography);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-}
+    public static void main(String[] args) throws DaoException {
+        BookListDaoImpl bookListDao = BookListDaoImpl.getInstance();
+        CustomBook customBook = new CustomBook("war and peace", "Lev Tolstoy", 581, "Tver");
+        CustomBook customBook2 = new CustomBook("Evgeniy Onegin", "Alexander Pushkin", 380, "Moscow");
+        bookListDao.remove(2);
+
+}}
