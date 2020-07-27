@@ -32,11 +32,12 @@ public class BookServiceImpl implements BookService {
         }
         DataValidator dataValidator = new DataValidator();
         if (!dataValidator.isNumberPagesValid(numberPages)
-                || !dataValidator.isAuthorValid(authors)) {
+                || !dataValidator.isAuthorValid(authors)
+                || !dataValidator.isTitleValid(title)
+                || !dataValidator.isTypographyValid(typography)) {
             throw new ServiceException("incorrect parameters");
         }
         int intNumberPages = Integer.parseInt(numberPages);
-
         CustomBook customBook = new CustomBook(title, authors,
                 intNumberPages, typography);
         BookListDao bookListDao = BookListDaoImpl.getInstance();
@@ -77,8 +78,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<CustomBook> findByTitle(String title) throws ServiceException {
-        if (title == null) {
-            throw new ServiceException("title is null");
+        DataValidator dataValidator = new DataValidator();
+        if (title == null || !dataValidator.isTitleValid(title)) {
+            throw new ServiceException("incorrect value of title");
         }
         BookListDaoImpl bookListDao = BookListDaoImpl.getInstance();
         try {

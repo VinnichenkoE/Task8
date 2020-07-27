@@ -3,7 +3,7 @@ package com.vinnichenko.task8.model.dao.impl;
 import com.vinnichenko.task8.exception.DaoException;
 import com.vinnichenko.task8.model.dao.BookListDao;
 import com.vinnichenko.task8.model.entity.CustomBook;
-import com.vinnichenko.task8.util.ConnectorDB;
+import com.vinnichenko.task8.connection.ConnectorDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static com.vinnichenko.task8.model.dao.ColumnName.*;
 
 public class BookListDaoImpl implements BookListDao {
 
@@ -27,11 +29,6 @@ public class BookListDaoImpl implements BookListDao {
     private final static String SQL_SELECT_BY_TITLE = "SELECT " +
             "id, authors, number_pages, typography " +
             "FROM warehouse WHERE title = ?";
-    private final static String COLUMN_ID = "id";
-    private final static String COLUMN_TITLE = "title";
-    private final static String COLUMN_AUTHORS = "authors";
-    private final static String COLUMN_NUMBER_PAGES = "number_pages";
-    private final static String COLUMN_TYPOGRAPHY = "typography";
 
     private BookListDaoImpl() {
     }
@@ -122,26 +119,6 @@ public class BookListDaoImpl implements BookListDao {
         } finally {
             closeResultSet(resultSet);
             closeStatement(preparedStatement);
-        }
-    }
-
-    public void closeStatement(PreparedStatement preparedStatement) {
-        if (preparedStatement != null) {
-            try {
-                preparedStatement.close();
-            } catch (SQLException e) {
-                System.out.println("can't close prepareStatement" + e.getMessage());
-            }
-        }
-    }
-
-    public void closeResultSet(ResultSet resultSet) {
-        if (resultSet != null) {
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                System.out.println("can't close resultSet" + e.getMessage());
-            }
         }
     }
 }

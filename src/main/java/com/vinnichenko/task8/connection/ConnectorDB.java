@@ -1,4 +1,4 @@
-package com.vinnichenko.task8.util;
+package com.vinnichenko.task8.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

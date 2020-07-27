@@ -1,7 +1,7 @@
 package com.vinnichenko.task8.controller.command.impl;
 
-import com.vinnichenko.task8.controller.RequestParameters;
-import com.vinnichenko.task8.controller.ResponseParameters;
+import com.vinnichenko.task8.controller.RequestParameter;
+import com.vinnichenko.task8.controller.ResponseParameter;
 import com.vinnichenko.task8.controller.command.Command;
 import com.vinnichenko.task8.exception.ServiceException;
 import com.vinnichenko.task8.model.service.impl.BookServiceImpl;
@@ -11,19 +11,19 @@ import java.util.Map;
 
 public class RemoveBookCommand implements Command {
     @Override
-    public Map<String, String> execute(Map<String, String> parameters) {
+    public Map<String, Object> execute(Map<String, String> parameters) {
         BookServiceImpl service = BookServiceImpl.getInstance();
-        String stringId = parameters.get(RequestParameters.ID);
+        String stringId = parameters.get(RequestParameter.ID);
         int id = Integer.parseInt(stringId);
-        Map<String, String> response = new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
         try {
             service.removeBook(id);
-            response.put(ResponseParameters.STATUS,
-                    ResponseParameters.SUCCESS_STATUS);
+            response.put(ResponseParameter.STATUS,
+                    ResponseParameter.SUCCESS_STATUS);
         } catch (ServiceException e) {
-            response.put(ResponseParameters.STATUS,
-                    ResponseParameters.FAIL_STATUS);
-            response.put(ResponseParameters.MESSAGE, e.getMessage());
+            response.put(ResponseParameter.STATUS,
+                    ResponseParameter.FAIL_STATUS);
+            response.put(ResponseParameter.MESSAGE, e.getMessage());
         }
         return response;
     }

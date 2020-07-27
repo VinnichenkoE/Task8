@@ -1,6 +1,6 @@
 package com.vinnichenko.task8.controller;
 
-public final class ResponseParameters {
+public final class ResponseParameter {
 
     public static final String STATUS = "status";
     public static final String SUCCESS_STATUS = "success";

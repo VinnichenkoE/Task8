@@ -1,7 +1,7 @@
 package com.vinnichenko.task8.controller.command.impl;
 
-import com.vinnichenko.task8.controller.RequestParameters;
-import com.vinnichenko.task8.controller.ResponseParameters;
+import com.vinnichenko.task8.controller.RequestParameter;
+import com.vinnichenko.task8.controller.ResponseParameter;
 import com.vinnichenko.task8.controller.command.Command;
 import com.vinnichenko.task8.exception.ServiceException;
 import com.vinnichenko.task8.model.entity.CustomBook;
@@ -13,19 +13,19 @@ import java.util.Map;
 
 public class FindByTitleCommand implements Command {
     @Override
-    public Map<String, String> execute(Map<String, String> parameters) {
+    public Map<String, Object> execute(Map<String, String> parameters) {
         BookServiceImpl service = BookServiceImpl.getInstance();
-        String title = parameters.get(RequestParameters.PARAMETER_TITLE);
-        Map<String, String> response = new HashMap<>();
+        String title = parameters.get(RequestParameter.TITLE);
+        Map<String, Object> response = new HashMap<>();
         try {
             List<CustomBook> books = service.findByTitle(title);
-            response.put(ResponseParameters.STATUS,
-                    ResponseParameters.SUCCESS_STATUS);
-            response.put(ResponseParameters.RESULT, books.toString());
+            response.put(ResponseParameter.STATUS,
+                    ResponseParameter.SUCCESS_STATUS);
+            response.put(ResponseParameter.RESULT, books);
         } catch (ServiceException e) {
-            response.put(ResponseParameters.STATUS,
-                    ResponseParameters.FAIL_STATUS);
-            response.put(ResponseParameters.MESSAGE, e.getMessage());
+            response.put(ResponseParameter.STATUS,
+                    ResponseParameter.FAIL_STATUS);
+            response.put(ResponseParameter.MESSAGE, e.getMessage());
         }
         return response;
     }
