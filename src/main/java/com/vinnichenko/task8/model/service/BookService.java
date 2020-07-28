@@ -16,4 +16,6 @@ public interface BookService {
     void removeBook(int id) throws ServiceException;
 
     List<CustomBook> findByTitle(String title) throws ServiceException;
+
+    List<CustomBook> findAllOrderBy(String columnName) throws ServiceException;
 }

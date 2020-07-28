@@ -19,6 +19,8 @@ public interface BookListDao {
 
     List<CustomBook> findByTitle(String title) throws DaoException;
 
+    List<CustomBook> findAllOrderBy(String columnName) throws DaoException;
+
     default void closeStatement(PreparedStatement preparedStatement) {
         if (preparedStatement != null) {
             try {

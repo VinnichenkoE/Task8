@@ -1,7 +1,5 @@
 package com.vinnichenko.task8.controller.command;
 
-
-
 import com.vinnichenko.task8.controller.command.impl.*;
 
 import java.util.HashMap;
@@ -17,6 +15,7 @@ public class CommandProvider {
         repository.put(CommandName.FIND_BY_ID, new FindByIdCommand());
         repository.put(CommandName.FIND_BY_TITLE, new FindByTitleCommand());
         repository.put(CommandName.WRONG_COMMAND, new WrongCommand());
+        repository.put(CommandName.FIND_ALL_ORDER_BY, new FindAllOrderByCommand());
     }
 
     public Command getCommand(String commandName) {

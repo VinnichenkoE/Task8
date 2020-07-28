@@ -90,4 +90,19 @@ public class BookServiceImpl implements BookService {
             throw new ServiceException(ex);
         }
     }
+
+    @Override
+    public List<CustomBook> findAllOrderBy(String columnName)
+            throws ServiceException {
+        if (columnName == null) {
+            throw  new ServiceException("incorrect value of columnName");
+        }
+        BookListDaoImpl bookListDao = BookListDaoImpl.getInstance();
+        try {
+            List<CustomBook> result = bookListDao.findAllOrderBy(columnName);
+            return result;
+        } catch (DaoException ex) {
+            throw new ServiceException(ex);
+        }
+    }
 }

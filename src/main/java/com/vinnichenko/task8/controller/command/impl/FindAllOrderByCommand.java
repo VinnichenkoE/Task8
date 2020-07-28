@@ -8,20 +8,20 @@ import com.vinnichenko.task8.model.entity.CustomBook;
 import com.vinnichenko.task8.model.service.impl.BookServiceImpl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class FindByIdCommand implements Command {
+public class FindAllOrderByCommand implements Command {
     @Override
     public Map<String, Object> execute(Map<String, String> parameters) {
         BookServiceImpl service = BookServiceImpl.getInstance();
-        String stringId = parameters.get(RequestParameter.ID);
-        int id = Integer.parseInt(stringId);
+        String columnName = parameters.get(RequestParameter.COLUMN_NAME);
         Map<String, Object> response = new HashMap<>();
         try {
-            CustomBook customBook = service.findById(id);
+            List<CustomBook> books = service.findAllOrderBy(columnName);
             response.put(ResponseParameter.STATUS,
                     ResponseParameter.SUCCESS_STATUS);
-            response.put(ResponseParameter.RESULT, customBook);
+            response.put(ResponseParameter.RESULT, books);
         } catch (ServiceException e) {
             response.put(ResponseParameter.STATUS,
                     ResponseParameter.FAIL_STATUS);

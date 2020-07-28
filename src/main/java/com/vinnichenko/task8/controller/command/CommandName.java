@@ -5,5 +5,6 @@ public enum CommandName {
     FIND_BY_ID,
     FIND_BY_TITLE,
     REMOVE_BOOK,
+    FIND_ALL_ORDER_BY,
     WRONG_COMMAND
 }
